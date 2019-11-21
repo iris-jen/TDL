@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microcharts" Version="0.7.1" />
+    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\SleepLogger.xaml.cs">
+      <DependentUpon>SleepLogger.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MoodCharts.xaml.cs">
+      <DependentUpon>MoodCharts.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SubstanceLogger.xaml.cs">
+      <DependentUpon>SubstanceLogger.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ViewData.xaml.cs">
+      <DependentUpon>ViewData.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MealLogger.xaml.cs">
+      <DependentUpon>MealLogger.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MoodLogger.xaml.cs">
+      <DependentUpon>MoodLogger.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MoodLogger.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ViewDataSetup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

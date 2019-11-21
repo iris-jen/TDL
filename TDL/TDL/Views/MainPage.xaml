@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SelfMonitoringApp.Views.MainPage"
+             Title="Self Monitoring Home">
+    <Grid BackgroundColor="DimGray" >
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Button x:Name="ButtonGoToMood" 
+                Text="Log Current Mood" 
+                Clicked="Goto_Mood_Clicked"
+                Grid.Row="0"
+                BackgroundColor="DarkOrange"
+                Margin="8"
+                Grid.Column="0"/>
+        <Button x:Name="ButtonGoToFood" 
+                Text="Log Eating" 
+                Grid.Row="0"
+                BackgroundColor="DarkOrange"
+                Margin="8"
+                Grid.Column="1"
+                Clicked="ButtonGoToFood_OnClicked"/>
+        <Button x:Name="ButtonGoToSubstance"         
+                Text="Log Substance Use"
+                Grid.Row="1"
+                BackgroundColor="DarkOrange"
+                Grid.Column="0"
+                Margin="8" Clicked="ButtonGoToSubstance_OnClicked"/>
+        <Button x:Name="ButtonGoToSleep"        
+                Text="Log Sleep" 
+                Grid.Row="1" 
+                Grid.Column="1"
+                Margin="8" 
+                BackgroundColor="DarkOrange"
+                Clicked="ButtonGoToSleep_OnClicked"/>
+        <Button x:Name="ButtonViewData"        
+                Text="View Data" 
+                Grid.Row="2" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="5" 
+                BackgroundColor="LightSalmon"
+                Clicked="ButtonViewData_OnClicked"/>
+        <Button x:Name="ButtonViewSchedule"        
+                Text="View Routines" 
+                Grid.Row="3" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="5" 
+                BackgroundColor="LightSalmon"/>
+        <Button x:Name="ButtonSetupRoutine"        
+                Text="-Setup routines-" 
+                Grid.Row="4" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="5" 
+                BackgroundColor="IndianRed"/>
+        <Button x:Name="ButtonAbout"        
+                Text="-About-" 
+                Grid.Row="5" 
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="5" 
+                BackgroundColor="IndianRed"/>
+    </Grid>
+</ContentPage>
