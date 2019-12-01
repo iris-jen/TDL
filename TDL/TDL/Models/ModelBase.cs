@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SelfMonitoringApp.Models
@@ -62,7 +63,9 @@ namespace SelfMonitoringApp.Models
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            
             return GenericConverter(value, targetType, parameter, culture);
         }
+
     }
 }

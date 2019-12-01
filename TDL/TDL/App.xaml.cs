@@ -16,8 +16,7 @@ namespace SelfMonitoringApp
 
         protected override void OnStart()
         {
-            // Handle when your app starts
-            EvilStores.Load();
+            EvilStores.InitStores();
         }
 
         

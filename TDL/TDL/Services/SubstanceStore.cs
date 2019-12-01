@@ -12,6 +12,7 @@ namespace SelfMonitoringApp.Services
 
         public SubstanceStore()
         {
+          
             _substances = new List<Substance>();
         }
 

@@ -49,13 +49,15 @@
                 <DatePicker x:Name="DatePickerEndDate"
                     Grid.Row="1"
                     Grid.Column="1"
+                            
                 />
             </Grid>
             <Button x:Name="ButtonGoToMood" 
                     Text="View Mood Graph" 
                     BackgroundColor="DarkOrange"
                     Margin="5"
-                    Grid.Column="0"/>
+                    Grid.Column="0"
+                    Clicked="ButtonGoToMood_Clicked"/>
         </StackLayout>
   </ContentPage.Content>
 </ContentPage>

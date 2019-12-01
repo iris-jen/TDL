@@ -5,9 +5,9 @@ using Xamarin.Forms.Xaml;
 namespace SelfMonitoringApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ViewDataPage : ContentPage
+    public partial class ViewDataMainPage : ContentPage
     {
-        public ViewDataPage()
+        public ViewDataMainPage()
         {
             InitializeComponent();
      
@@ -15,19 +15,9 @@ namespace SelfMonitoringApp.Views
      
         }
 
-        
-        private async void ButtonCancel_OnClicked(object sender, EventArgs e)
-        {
-        }
-
-        private async void ButtonSave_OnClicked(object sender, EventArgs e)
-        {
-     
-        }
-
         private async void ButtonGoToMood_OnClicked(object sender, EventArgs e)
         {
-            
+            await Navigation.PushAsync(new ViewDataSetup());
         }
     }
 }

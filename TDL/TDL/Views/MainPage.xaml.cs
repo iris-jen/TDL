@@ -44,7 +44,7 @@ namespace SelfMonitoringApp.Views
 
         async void ButtonViewData_OnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MoodChartsPage());
+            await Navigation.PushAsync(new ViewDataMainPage());
         }
     }
 }

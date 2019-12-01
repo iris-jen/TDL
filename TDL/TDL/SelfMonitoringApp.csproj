@@ -17,14 +17,14 @@
     <Compile Update="Views\SleepLogger.xaml.cs">
       <DependentUpon>SleepLogger.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MoodCharts.xaml.cs">
-      <DependentUpon>MoodCharts.xaml</DependentUpon>
+    <Compile Update="Views\MoodChartsPage.xaml.cs">
+      <DependentUpon>MoodChartsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SubstanceLogger.xaml.cs">
       <DependentUpon>SubstanceLogger.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ViewData.xaml.cs">
-      <DependentUpon>ViewData.xaml</DependentUpon>
+    <Compile Update="Views\ViewDataMain.xaml.cs">
+      <DependentUpon>ViewDataMain.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MealLogger.xaml.cs">
       <DependentUpon>MealLogger.xaml</DependentUpon>
@@ -32,13 +32,16 @@
     <Compile Update="Views\MoodLogger.xaml.cs">
       <DependentUpon>MoodLogger.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\ViewMoodDataSetup.xaml.cs">
+      <DependentUpon>ViewMoodDataSetup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Views\MoodLogger.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ViewDataSetup.xaml">
+    <EmbeddedResource Update="Views\ViewMoodDataSetup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
