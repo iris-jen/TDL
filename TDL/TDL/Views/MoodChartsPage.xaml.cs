@@ -26,11 +26,20 @@ namespace SelfMonitoringApp.Views
             try
             {
                 InitializeComponent();
-
-
-
                 GenerateChart(moodList);
-                
+                Dictionary<string, List<Mood>> moodLogByDate = new Dictionary<string, List<Mood>>();
+
+                DateTime lastDate = moodList.First().RegisteredTime;
+                var dateList = new List<Mood>();
+                foreach(var m in moodList)
+                {
+                    if (m.RegisteredTime.Date >= lastDate.Date)
+                    {
+                        moodLogByDate.Add(dateList, m.RegisteredTime.Date.ToString());
+                        dateList = new List<Mood>();
+                    }
+                }
+
             }
             catch(Exception ex)
             {
@@ -70,15 +79,13 @@ namespace SelfMonitoringApp.Views
                 {
                     entries.Add(new Entry((float)m.OverallMood)
                     {
-                        ValueLabel = m.RegisteredTime.Date.ToString(),
+                        ValueLabel = m.RegisteredTime.ToString(),
                         Color = GetColorFromRating(m.OverallMood),
                         Label = m.Emotion,
                         TextColor = SKColors.Black,
                     }) ;
                     
                 }
-                
-
                 MoodChart.Chart = new LineChart() { Entries = entries };
             }
             catch (Exception ex)

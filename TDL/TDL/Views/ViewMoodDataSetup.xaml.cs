@@ -18,41 +18,48 @@ namespace SelfMonitoringApp.Views
         public ViewDataSetup()
         {
             InitializeComponent();
-
-
         }
 
-
-
+        public enum DataAgregationMethod
+        {
+            invalid = -1,
+            PadToOneHour = 0,
+        }
 
         private async void ButtonGoToMood_Clicked(object sender, EventArgs e)
         {
             try
             {
-                List<Mood> passinList = new List<Mood>();
+                var passinList = GetMoodList();
 
-                var startDate = DatePickerStartDate.Date;
-                var endDate = DatePickerEndDate.Date;
-                var endDateSelected = CheckboxEndDate.IsChecked;
+                var dataParseMethod = DataAgregationMethod.PadToOneHour;
 
-
-                if (startDate > endDate || endDate < startDate)
-                    DisplayAlert("Your start date cant be after your end date or vice versa");
-                else if (startDate < endDate)
+                switch(dataParseMethod)
                 {
-                    var moodRet = EvilStores.MoodStores.GetItemsAsync().Result;
-                    
+                    case DataAgregationMethod.PadToOneHour:
+                        DateTime mover = passinList.First().RegisteredTime;
+                        double initialVal = passinList.First().OverallMood;
 
-                    foreach (Mood m in moodRet)
-                    {
-                        if (m.RegisteredTime > startDate && m.RegisteredTime < endDate)
+                        for (int i = 0; i < 24; i++)
                         {
-                            passinList.Add(m);
+                            DateTime t = mover;
+                            
+                            
+                            foreach (var mood in passinList)
+                            {
+
+
+                            }
                         }
-                    }
-                    passinList.OrderByDescending(x => x.RegisteredTime);
-                    await Navigation.PushAsync(new MoodChartsPage(passinList));
+
+                        break;
+                    default:
+                        break;
                 }
+                
+                await Navigation.PushAsync(new MoodChartsPage(passinList));
+
+
             }
             catch(Exception ex)
             {
@@ -60,15 +67,58 @@ namespace SelfMonitoringApp.Views
             }
         }
 
+        public List<Mood> GetMoodList()
+        {
+            List<Mood> returnList = null;
+            try
+            {
+                var startDate = DatePickerStartDate.Date;
+                var endDate = DatePickerEndDate.Date;
+
+                if (startDate > endDate || endDate < startDate)
+                    DisplayAlert("Your start date cant be after your end date or vice versa");
+                else if (startDate < endDate)
+                {
+                    var moodRet = EvilStores.MoodStores.GetItemsAsync().Result;
+
+
+                    foreach (Mood m in moodRet)
+                    {
+                        if (m.RegisteredTime > startDate && m.RegisteredTime < endDate)
+                            returnList.Add(m);
+                    }
+                    returnList.OrderByDescending(x => x.RegisteredTime);
+                }
+            }
+            catch(Exception ex)
+            {
+                DisplayException(ex);
+            }
+            return returnList;
+        }
+
+        private async void ButtonUpdateEntrys_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var moodSelection = GetMoodList();
+                ListViewMood.ItemsSource = moodSelection;
+            }
+            catch(Exception ex)
+            {
+                DisplayException(ex);
+            }
+        }
+
+        #region Alarm methods
         public void DisplayAlert(string message)
         {
-            DisplayAlert("Uh oh :(",message, "Ok.");
+            DisplayAlert("Uh oh :(", message, "Ok.");
         }
         public void DisplayException(Exception ex)
         {
             DisplayAlert("Exception", $"Exception: {ex}{Environment.NewLine} Trace: {Environment.StackTrace}", "Ok :(");
         }
+        #endregion
     }
-
-
 }

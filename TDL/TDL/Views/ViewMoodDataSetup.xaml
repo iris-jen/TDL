@@ -10,7 +10,7 @@
 
         <StackLayout BackgroundColor="DimGray">
             <!--Substance Used Picker-->
-            <Grid BackgroundColor="HotPink" Margin="5">
+            <Grid BackgroundColor="HotPink" Margin="5" HeightRequest="120">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
@@ -56,8 +56,18 @@
                     Text="View Mood Graph" 
                     BackgroundColor="DarkOrange"
                     Margin="5"
-                    Grid.Column="0"
                     Clicked="ButtonGoToMood_Clicked"/>
+            <Button x:Name="ButtonUpdateEntrys"
+                    Text="View Entrys"
+                    Margin="5"
+                    BackgroundColor="DarkOrange"
+                    Clicked="ButtonUpdateEntrys_Clicked"
+                    />
+            <ListView 
+                BackgroundColor="White"
+                Margin="5" 
+                x:Name="ListViewMood"
+                />
         </StackLayout>
   </ContentPage.Content>
 </ContentPage>
