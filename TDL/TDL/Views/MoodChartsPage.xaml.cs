@@ -20,17 +20,13 @@ namespace SelfMonitoringApp.Views
     public partial class MoodChartsPage : ContentPage
     {
 
-
+        
         public MoodChartsPage(List<Mood> moodList)
         {
             try
             {
                 InitializeComponent();
-
-
-
-                GenerateChart(moodList);
-                
+                GenerateChart(moodList);                
             }
             catch(Exception ex)
             {
@@ -66,11 +62,12 @@ namespace SelfMonitoringApp.Views
             try
             {
                 List<Entry> entries = new List<Entry>();
+                
                 foreach(Mood m in moodList)
                 {
                     entries.Add(new Entry((float)m.OverallMood)
                     {
-                        ValueLabel = m.RegisteredTime.Date.ToString(),
+                        ValueLabel = m.OverallMood.ToString(),
                         Color = GetColorFromRating(m.OverallMood),
                         Label = m.Emotion,
                         TextColor = SKColors.Black,
@@ -79,7 +76,7 @@ namespace SelfMonitoringApp.Views
                 }
                 
 
-                MoodChart.Chart = new LineChart() { Entries = entries };
+                MoodChart.Chart = new LineChart() { Entries = entries, LabelTextSize = 8, BackgroundColor = SKColors.Black };
             }
             catch (Exception ex)
             {
@@ -107,7 +104,7 @@ namespace SelfMonitoringApp.Views
         {
             try
             {
-                await EvilStores.SaveObject(ObjectNames.Substance);
+                await ItemStores.SaveObject(ObjectNames.Substance);
                 await Navigation.PopAsync();
             }
             catch(Exception ex)

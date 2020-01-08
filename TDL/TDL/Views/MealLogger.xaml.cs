@@ -32,8 +32,8 @@ namespace SelfMonitoringApp.Views
         private async void ButtonSave_OnClicked(object sender, EventArgs e)
         {
             meal.RegisteredTime = DateTime.Now;
-            await EvilStores.MealStores.AddItemAsync(meal);
-            await EvilStores.SaveObject(ObjectNames.Meal);
+            await ItemStores.MealStores.AddItemAsync(meal);
+            await ItemStores.SaveObject(ObjectNames.Meal);
             await Navigation.PopAsync();
         }
     }

@@ -17,8 +17,6 @@ namespace SelfMonitoringApp.Views
             InitializeComponent();
             mood = new Mood();
             BindingContext = mood;
-
-            PickerEmotion.ItemsSource = Helper.Emotions;
         }
 
         
@@ -30,8 +28,8 @@ namespace SelfMonitoringApp.Views
         private async void ButtonSave_OnClicked(object sender, EventArgs e)
         {
             mood.RegisteredTime = DateTime.Now;
-            await EvilStores.MoodStores.AddItemAsync(mood);
-            await EvilStores.SaveObject(ObjectNames.Mood);
+            await ItemStores.MoodStores.AddItemAsync(mood);
+            await ItemStores.SaveObject(ObjectNames.Mood);
             await Navigation.PopAsync();
 
         }

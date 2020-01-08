@@ -9,30 +9,7 @@
              Title="Log Substance Use">
     <ContentPage.Content>
         <StackLayout BackgroundColor="DimGray">
-            <!--Substance Used Picker-->
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                
-                <!-- Substance Used Header !-->
-                <Label Text="Data"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   BackgroundColor="DeepPink"
-                />
-
-                <!--Substance Picker-->
-                
-            </Grid>
-            
-                <forms:ChartView x:Name="MoodChart" HeightRequest="200"></forms:ChartView>
-            
-
+            <forms:ChartView x:Name="MoodChart" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"></forms:ChartView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

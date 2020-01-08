@@ -6,37 +6,38 @@ using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+
 namespace SelfMonitoringApp.Services
 {
+
     public static class Helper
     {
+
+        public const string PrimaryTextColor = "212121";
+        public const string SecondaryTextColor = "757575";
+        public const string DividerColor = "BDBDBD";
+        public const string AccentColor = "CDDC39";
+
+
+        public static string GetDateTimeString(DateTime dt, bool _24hour)
+        {
+            var date = $"{dt.Year.ToString("00")}/{dt.Month.ToString("00")}/{dt.Day.ToString("00")}";
+            var pm = dt.Hour >= 12;
+            var hour = _24hour ? dt.Hour: pm ? dt.Hour : dt.Hour-12;
+
+            return $"{date} {hour}:{dt.Minute}:{dt.Second} {(_24hour ? string.Empty: pm ? "pm":"am")}";
+        }
+
         public const string AddNew = "-Add New-";
 
-        public static List<string> Emotions = new List<string>
-        {
-            "Devastated",
-            "Depressed",
-            "Sad",
-            "Content",
-            "Excited",
-            "Angry",
-            "Anxious",
-            "Apathetic",
-            "Strung Out",
-            "Hyper",
-            "Over whelmed",
-            "Bored",
-            "Jealous",
-            "Nervous",
-            AddNew
-        };
+   
 
         public static Dictionary<MealSizes, string> MealSizesDictionary = new Dictionary<MealSizes, string>()
         {
             {MealSizes.Under,   "Under Ate"},
             {MealSizes.Light,   "Smaller than usual" },
             {MealSizes.Regular, "The usual" },
-            {MealSizes.Large,   "BIG CHONKR'" },
+            {MealSizes.Large,   "Larger than usual'" },
             {MealSizes.Over,    "Over Ate"}
         };
 
@@ -66,9 +67,7 @@ namespace SelfMonitoringApp.Services
 
         public static List<string> DeliveryMethod = new List<string>
         {
-            "Injected",
             "Smoked",
-            "Snorted",
             "Vaporized",
             "Drank Quickly",
             "Drank Slowly",
@@ -84,14 +83,12 @@ namespace SelfMonitoringApp.Services
         {
             try
             {
-                var emotions = JObject.FromObject(Emotions);
                 var substances = JObject.FromObject(Substances);
                 var deliveryMethods = JObject.FromObject(DeliveryMethod);
                 var unitsOfMeasurement = JObject.FromObject(UnitsOfMeasurement);
 
                 var suggestionsObject = new JObject()
                 {
-                    { "Emotions", emotions},
                     { "Substances", substances },
                     { "DeliveryMethods", deliveryMethods},
                     { "UnitsOfMeasurement", unitsOfMeasurement}

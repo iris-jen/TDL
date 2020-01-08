@@ -4,60 +4,99 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SelfMonitoringApp.Views.ViewDataSetup"
+             x:Class="SelfMonitoringApp.Views.ViewMoodDataSetup"
              Title="View Mood Logs">
   <ContentPage.Content>
-
-        <StackLayout BackgroundColor="DimGray">
+        <ScrollView>
+            <StackLayout>
             <!--Substance Used Picker-->
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <!-- Substance Used Header !-->
-                <Label Text="Start Date"
+                <Grid BackgroundColor="#00BCD4" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Substance Used Header !-->
+                    <Label Text="Start Date"
                        HorizontalTextAlignment="Center" 
                        VerticalTextAlignment="Center"
                        FontSize="Large"
                        FontAttributes="Bold"
                        TextColor="White"
-                       BackgroundColor="DeepPink"
+                       BackgroundColor="#0097A7"
                 />
-                <DatePicker 
+                    <DatePicker 
                     x:Name="DatePickerStartDate"
                     Grid.Row="1"
                 />
-                <!-- End Date Label !-->
-                <Label Text="End Date"
+                    <!-- End Date Label !-->
+                    <Label Text="End Date"
                        HorizontalTextAlignment="Center" 
                        VerticalTextAlignment="Center"
                        FontSize="Large"
                        FontAttributes="Bold"
                        TextColor="White"
-                       BackgroundColor="DeepPink"
+                       BackgroundColor="#0097A7"
                        Grid.Column="1"
                 />
-                <!-- End Date Label !-->
-                <CheckBox x:Name="CheckboxEndDate"
+                    <!-- End Date Label !-->
+                    <CheckBox x:Name="CheckboxEndDate"
                           Grid.Column="1"
+                          Color="Black"
                 />
-                <DatePicker x:Name="DatePickerEndDate"
+                    <DatePicker x:Name="DatePickerEndDate"
                     Grid.Row="1"
-                    Grid.Column="1"
-                            
+                    Grid.Column="1"  
                 />
-            </Grid>
-            <Button x:Name="ButtonGoToMood" 
-                    Text="View Mood Graph" 
-                    BackgroundColor="DarkOrange"
-                    Margin="5"
-                    Grid.Column="0"
-                    Clicked="ButtonGoToMood_Clicked"/>
-        </StackLayout>
-  </ContentPage.Content>
+                </Grid>
+                <Button x:Name="ButtonGoToMood" 
+                        Text="View Mood Graph" 
+                        BackgroundColor="#B2EBF2"
+                        Margin="5"
+                        Grid.Column="0"
+                        Clicked="ButtonGoToMood_Clicked"
+                />
+                <Button x:Name="ButtonPopulateList" 
+                        Text="Populate List" 
+                        BackgroundColor="#B2EBF2"
+                        Margin="5"
+                        Grid.Column="0"
+                        Clicked="ButtonPopulateList_Clicked"/>
+
+                <ListView x:Name="MoodListView2" 
+                          SeparatorVisibility="Default"
+                          SeparatorColor="#BDBDBD"
+                          GroupDisplayBinding   = "{Binding Title}"
+                          GroupShortNameBinding = "{Binding ShortName}"
+                          ItemTapped="MoodListView_ItemTapped"
+                          IsGroupingEnabled="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text   = "{Binding Title}"
+                                  Detail = "{Binding Subtitle}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+
+                <ListView x:Name="MoodListView" 
+                          SeparatorVisibility="Default"
+                          SeparatorColor="#BDBDBD"
+                          GroupDisplayBinding   = "{Binding Title}"
+                          GroupShortNameBinding = "{Binding ShortName}"
+                          ItemTapped="MoodListView_ItemTapped"
+                          IsGroupingEnabled="True">
+                    <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text   = "{Binding Title}"
+                                  Detail = "{Binding Subtitle}"/>
+                    </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
 </ContentPage>

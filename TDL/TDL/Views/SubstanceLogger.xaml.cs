@@ -20,6 +20,7 @@ namespace SelfMonitoringApp.Views
             PickerSubstance.ItemsSource = Helper.Substances;
             PickerUnit.ItemsSource = Helper.UnitsOfMeasurement;
             PickerUseMethod.ItemsSource = Helper.DeliveryMethod;
+
         }
 
         
@@ -31,8 +32,8 @@ namespace SelfMonitoringApp.Views
         private async void ButtonSave_OnClicked(object sender, EventArgs e)
         {
             Substance.RegisteredTime = DateTime.Now;
-            await EvilStores.SubstanceStores.AddItemAsync(Substance);
-            await EvilStores.SaveObject(ObjectNames.Substance);
+            await ItemStores.SubstanceStores.AddItemAsync(Substance);
+            await ItemStores.SaveObject(ObjectNames.Substance);
             await Navigation.PopAsync();
 
         }

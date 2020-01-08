@@ -2,7 +2,7 @@
 
 namespace SelfMonitoringApp.Models
 {
-    public class Substance : ModelBase
+    public class Substance : ModelBase, IModel
     {
         private string _substanceName;
         public string SubstanceName

@@ -7,21 +7,8 @@
              Title="Log Meal"
              x:Class="SelfMonitoringApp.Views.MealLoggerPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="DimGray">
-            <!--Main Header-->
-            <Label x:Name="LabelMainHeader" 
-                   Text="Log Meal" 
-                   Style="{DynamicResource TitleStyle}" 
-                   HeightRequest="50" 
-                   VerticalTextAlignment="Center" 
-                   FontAttributes="Bold"
-                   FontSize="Large" 
-                   TextColor="NavajoWhite" 
-                   TextDecorations="Underline" 
-                   HorizontalTextAlignment="Center" 
-                   BackgroundColor="Black"/>
-
-            <Grid BackgroundColor="HotPink" Margin="5">
+        <StackLayout BackgroundColor="White">
+            <Grid BackgroundColor="#b3e5fc" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
@@ -33,14 +20,14 @@
                    FontSize="Large"
                    FontAttributes="Bold"
                    TextColor="White"
-                   BackgroundColor="DeepPink"
+                   BackgroundColor="#0288d1"
                    />
                 <!--Emotion Picker -->
             <Picker x:Name="PickerMealType" 
                     SelectedItem="{Binding MealType}"
                     Grid.Row="1"/>
             </Grid>
-            <Grid BackgroundColor="HotPink" Margin="5">
+            <Grid BackgroundColor="#b3e5fc" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
@@ -51,8 +38,8 @@
                        VerticalTextAlignment="Center"
                        FontSize="Large"
                        FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
+                       TextColor="#FFFFFF"
+                       BackgroundColor="#0288d1"
                 />
                 <!--Emotion Picker -->
                 <Picker x:Name="PickerMealSize" 
@@ -60,16 +47,60 @@
                         Grid.Row="1"/>
             </Grid>
 
-            <!--Big dum boxy boi -->
-            <Editor x:Name="EditorDescription"
+            <Grid BackgroundColor="#b3e5fc" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Label Text="Description"
+                       HorizontalTextAlignment="Center" 
+                       VerticalTextAlignment="Center"
+                       FontSize="Large"
+                       FontAttributes="Bold"
+                       TextColor="#FFFFFF"
+                       BackgroundColor="#0288d1"
+                />
+
+                <Editor x:Name="EditorDescription"
+                    Grid.Row="1"
                     Placeholder="What did you eat?"
                     HeightRequest="100"
                     Text="{Binding Description}"
-                    BackgroundColor="HotPink"
+                    TextColor="#212121"
+                    PlaceholderColor="#757575"
+                    BackgroundColor="#b3e5fc"
                     Margin="5"/>
-            <!--Save | Cancel -->
-            <Button x:Name="ButtonCancel" BackgroundColor="LightCoral" Margin="5" Text="Cancel" Clicked="ButtonCancel_OnClicked"/>
-            <Button x:Name="ButtonSave" BackgroundColor="LightGreen" Margin="5" Text="Save" Clicked="ButtonSave_OnClicked"/>
+            </Grid>
+
+            <!-- Save / Cancel grid-->
+            <Grid VerticalOptions="EndAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="ButtonCancel" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Cancel" 
+                        Clicked="ButtonCancel_OnClicked"
+                        Grid.Column="0"
+                    />
+                <Button x:Name="ButtonSave" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Save" 
+                        Clicked="ButtonSave_OnClicked"
+                        Grid.Column="1"   
+                    />
+            </Grid>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
