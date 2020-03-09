@@ -8,12 +8,17 @@
   <ItemGroup>
     <PackageReference Include="Microcharts" Version="0.7.1" />
     <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.3.0.947036" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Update="Views\SleepLogger.xaml.cs">
       <DependentUpon>SleepLogger.xaml</DependentUpon>
     </Compile>
@@ -22,9 +27,6 @@
     </Compile>
     <Compile Update="Views\SubstanceLogger.xaml.cs">
       <DependentUpon>SubstanceLogger.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ViewDataMain.xaml.cs">
-      <DependentUpon>ViewDataMain.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MealLogger.xaml.cs">
       <DependentUpon>MealLogger.xaml</DependentUpon>
@@ -38,6 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\MoodLogger.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

@@ -7,109 +7,152 @@
              x:Class="SelfMonitoringApp.Views.SubstanceLoggerPage"
              Title="Log Substance Use">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="DimGray">
-            <!--Substance Used Picker-->
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
+        <ScrollView>
+            <StackLayout BackgroundColor="White">
+                <!--Substance Used Picker-->
+                <Grid BackgroundColor="#b3e5fc" HeightRequest="110" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                 
-                <!-- Substance Used Header !-->
-                <Label Text="Substance Used"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   BackgroundColor="DeepPink"
-                />
-
-                <!--Substance Picker-->
-                <Picker x:Name="PickerSubstance" 
-                    SelectedItem="{Binding SubstanceName}"
-                    Grid.Row="1"
-                />
-            </Grid>
-
-            <!--Consumption Method Grid-->
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <!--Consumption Method Header -->
-                <Label Text="Consumption Method"
+                    <!-- Substance Used Header !-->
+                    <Label Text="Substance Used"
                        HorizontalTextAlignment="Center" 
                        VerticalTextAlignment="Center"
                        FontSize="Large"
                        FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
-                />
-                <!--Consumption Method Picker -->
-                <Picker x:Name="PickerUseMethod" 
-                        SelectedItem="{Binding ConsumptionMethod}"
+                       TextColor="#FFFFFF"
+                       BackgroundColor="#0288d1"
+                    />
+                    <!--Substance Picker-->
+                    <Picker x:Name="PickerSubstance" 
+                        SelectedItem="{Binding SubstanceName}"
                         Grid.Row="1"
-                />
-            </Grid>
+                    />
+                </Grid>
 
-            <!--Quantity And Unit Grid-->
-            <Grid BackgroundColor="HotPink" Margin="5" HeightRequest="100" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                <!--Consumption Method Grid-->
+                <Grid BackgroundColor="#b3e5fc" HeightRequest="110" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
 
-                <!--Quantity Header -->
-                <Label Text="Quantity"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
-                />
-                <!--Quantity Entry -->
-                <Entry x:Name="EntryQuantity" 
+                    <!--Consumption Method Header -->
+                    <Label Text="Consumption Method"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="#0288d1"
+                    />
+                    <!--Consumption Method Picker -->
+                    <Picker x:Name="PickerUseMethod" 
+                            SelectedItem="{Binding ConsumptionMethod}"
+                            Grid.Row="1"
+                    />
+                </Grid>
+
+                <!--Quantity And Unit Grid-->
+                <Grid BackgroundColor="#b3e5fc" Margin="5" HeightRequest="110" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--Quantity Header -->
+                    <Label Text="Quantity"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="#0288d1"
+                           
+                    />
+                    <!--Quantity Entry -->
+                    <Entry x:Name="EntryQuantity" 
+                            Grid.Row="1"
+                            Text="{Binding Amount}"
+                            TextColor="#212121"
+                    />
+
+                    <Label Text="Unit"
+                           HorizontalTextAlignment="Center" 
+                           VerticalTextAlignment="Center"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="#0288d1"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                    />
+                    <!--Unit Picker-->
+                    <Picker x:Name="PickerUnit" 
+                            SelectedItem="{Binding Unit}"
+                            Grid.Row="1" 
+                            Grid.Column="1"
+                    />
+                </Grid>
+
+                <Grid BackgroundColor="#b3e5fc" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Text="How do you feel?"
+                            HorizontalTextAlignment="Center" 
+                            VerticalTextAlignment="Center"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            BackgroundColor="#0288d1"
+                    />
+                    <!--Comment Editor -->
+                    <Editor x:Name="EditorDescription"
+                        Placeholder="Describe how you feel after using if you like"
+                        HeightRequest="150"
+                        Text="{Binding Comment}"
+                        TextColor="#212121"
+                        PlaceholderColor="#757575"
+                        BackgroundColor="#b3e5fc"
                         Grid.Row="1"
-                        Text="{Binding Amount}"
-                />
-
-                <Label Text="Unit"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
-                       Grid.Row="0"
-                       Grid.Column="1"
-                />
-                <!--Unit Picker-->
-                <Picker x:Name="PickerUnit" 
-                        SelectedItem="{Binding Unit}"
-                        Grid.Row="1" 
-                        Grid.Column="1"
-                />
-            </Grid>
-
-            <!--Comment Editor -->
-            <Editor x:Name="EditorDescription"
-                    Placeholder="Add a comment if you like"
-                    HeightRequest="100"
-                    Text="{Binding Comment}"
-                    BackgroundColor="HotPink"
-                    Margin="5"/>
-
-            <!--Save | Cancel -->
-            <Button x:Name="ButtonCancel" BackgroundColor="LightCoral" Margin="5" Text="Cancel" Clicked="ButtonCancel_OnClicked"/>
-            <Button x:Name="ButtonSave" BackgroundColor="LightGreen" Margin="5" Text="Save" Clicked="ButtonSave_OnClicked"/>
-        </StackLayout>
+                        Margin="5"/>
+                </Grid>
+                <!-- Save / Cancel grid-->
+                <Grid VerticalOptions="EndAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ButtonCancel" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Cancel" 
+                        Clicked="ButtonCancel_OnClicked"
+                        Grid.Column="0"
+                    />
+                    <Button x:Name="ButtonSave" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Save" 
+                        Clicked="ButtonSave_OnClicked"
+                        Grid.Column="1"   
+                    />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

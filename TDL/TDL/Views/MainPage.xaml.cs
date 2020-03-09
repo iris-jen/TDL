@@ -10,9 +10,26 @@ namespace SelfMonitoringApp.Views
     {
         private Sleep sleepHolder = new Sleep();
 
+        
         public MainPage()
         {
             InitializeComponent();
+
+            var cl = new Button.ButtonContentLayout(Button.ButtonContentLayout.ImagePosition.Left, 40);
+            ButtonGoToFood.ImageSource = ImageSource.FromFile("KnifeFork.png");
+            ButtonGoToFood.ContentLayout = cl;
+
+            ButtonGoToSleep.ImageSource = ImageSource.FromFile("Bed.png");
+            ButtonGoToSleep.ContentLayout = cl;
+
+            
+
+            var eye = ImageSource.FromFile("eye.png");
+            ButtonViewFoodData.ImageSource = eye;
+            ButtonViewMoodData.ImageSource = eye;
+            ButtonViewSubstanceData.ImageSource = eye;
+            ButtonViewSleepData.ImageSource = eye;
+
         }
         
         async void Goto_Mood_Clicked(object sender, EventArgs e)
@@ -36,15 +53,15 @@ namespace SelfMonitoringApp.Views
 
             if (sleepHolder.SleepSet && sleepHolder.WakeSet)
             {
-                await EvilStores.SleepStores.AddItemAsync(sleepHolder);
-                await EvilStores.SaveObject(ObjectNames.Sleep);
+                await ItemStores.SleepStores.AddItemAsync(sleepHolder);
+                await ItemStores.SaveObject(ObjectNames.Sleep);
                 sleepHolder = new Sleep();
             }
         }
 
-        async void ButtonViewData_OnClicked(object sender, EventArgs e)
+        async void ButtonViewMoodData_OnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ViewDataMainPage());
+            await Navigation.PushAsync(new ViewMoodDataSetup());
         }
     }
 }

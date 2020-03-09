@@ -6,8 +6,8 @@ namespace SelfMonitoringApp.Models
 {
     public class Sleep : ModelBase
     {
-        public DateTime SleepStart { get; private set; }
-        public DateTime SleepEnd { get; private set; }
+        public TimeSpan SleepStart { get; set; }
+        public TimeSpan SleepEnd { get;  set; }
 
         private bool _rememberedDream;
         public bool RememberedDream
@@ -75,17 +75,6 @@ namespace SelfMonitoringApp.Models
             }
         }
 
-        public void OnSleep()
-        {
-            SleepStart = DateTime.Now;
-            SleepSet = true;
-        }
-
-        public void OnWake()
-        {
-            SleepEnd = DateTime.Now;
-            WakeSet = true;
-        }
 
         public DateTime RegisteredTime { get; set; }
         public bool SleepSet { get; set; }

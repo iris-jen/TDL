@@ -20,26 +20,13 @@ namespace SelfMonitoringApp.Views
     public partial class MoodChartsPage : ContentPage
     {
 
-
+        
         public MoodChartsPage(List<Mood> moodList)
         {
             try
             {
                 InitializeComponent();
-                GenerateChart(moodList);
-                Dictionary<string, List<Mood>> moodLogByDate = new Dictionary<string, List<Mood>>();
-
-                DateTime lastDate = moodList.First().RegisteredTime;
-                var dateList = new List<Mood>();
-                foreach(var m in moodList)
-                {
-                    if (m.RegisteredTime.Date >= lastDate.Date)
-                    {
-                        moodLogByDate.Add(dateList, m.RegisteredTime.Date.ToString());
-                        dateList = new List<Mood>();
-                    }
-                }
-
+                GenerateChart(moodList);                
             }
             catch(Exception ex)
             {
@@ -75,18 +62,21 @@ namespace SelfMonitoringApp.Views
             try
             {
                 List<Entry> entries = new List<Entry>();
+                
                 foreach(Mood m in moodList)
                 {
                     entries.Add(new Entry((float)m.OverallMood)
                     {
-                        ValueLabel = m.RegisteredTime.ToString(),
+                        ValueLabel = m.OverallMood.ToString(),
                         Color = GetColorFromRating(m.OverallMood),
                         Label = m.Emotion,
                         TextColor = SKColors.Black,
                     }) ;
                     
                 }
-                MoodChart.Chart = new LineChart() { Entries = entries };
+                
+
+                MoodChart.Chart = new LineChart() { Entries = entries, LabelTextSize = 8, BackgroundColor = SKColors.Black };
             }
             catch (Exception ex)
             {
@@ -114,7 +104,7 @@ namespace SelfMonitoringApp.Views
         {
             try
             {
-                await EvilStores.SaveObject(ObjectNames.Substance);
+                await ItemStores.SaveObject(ObjectNames.Substance);
                 await Navigation.PopAsync();
             }
             catch(Exception ex)

@@ -2,6 +2,8 @@
 using SelfMonitoringApp.Views;
 using Xamarin.Forms;
 
+using Xamarin.Forms.Xaml;
+using System;
 namespace SelfMonitoringApp
 {
     public partial class App : Application
@@ -16,13 +18,21 @@ namespace SelfMonitoringApp
 
         protected override void OnStart()
         {
-            EvilStores.InitStores();
+            try
+            {
+                ItemStores.InitStores();
+            }
+            catch (Exception e)
+            {
+
+            }
+                        
         }
 
         
         protected override void OnSleep()
         {
-            EvilStores.SerializeAll();
+            ItemStores.SaveObject(ObjectNames.All);
         }
 
         protected override void OnResume()

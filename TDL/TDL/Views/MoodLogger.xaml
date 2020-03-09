@@ -7,105 +7,153 @@
              x:Class="SelfMonitoringApp.Views.MoodLoggerPage"
              Title="Log Mood">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="DimGray">
+        <ScrollView>
+            <StackLayout>
             <!--3X3 Sub Grid for Mood slider and labels-->
-            <Grid Margin="5" BackgroundColor="HotPink" HeightRequest="150" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                <Grid Margin="5" BackgroundColor="#b3e5fc" HeightRequest="150" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <!--Rate your mood header-->
-                <Label Text="Rate you're overall mood" 
-                        HorizontalTextAlignment="Center" 
-                        VerticalTextAlignment="Center"
-                        FontSize="Large"
-                        FontAttributes="Bold"
-                        TextColor="White"
-                        BackgroundColor="DeepPink"
-                        Grid.Row="0" 
-                        Grid.Column="0" 
-                        Grid.ColumnSpan="3"/>
-                <!--Current Mood Slider-->
-                <Slider  x:Name="SliderMoodRating"
-                         BackgroundColor="LightSalmon"
-                         Value="{Binding OverallMood}" 
-                         ThumbColor="BlueViolet"
-                         MinimumTrackColor="Red"
-                         MaximumTrackColor="LawnGreen"
-                         Minimum="0" 
-                         Maximum="10" 
-                         Grid.Row="1"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="3"
-                         Margin="10"
-                         />
-                <!--Min mood label-->
-                <Label   Text="0"                      
-                         Grid.Row="2" 
-                         Grid.Column="0" 
-                         TextColor="White"
-                         FontSize="Caption"
-                         Margin="15,-12,0,0" />
+                    <!--Rate your mood header-->
+                    <Label Text="Rate you're overall mood" 
+                                HorizontalTextAlignment="Center" 
+                                VerticalTextAlignment="Center"
+                                FontSize="Large"
+                                FontAttributes="Bold"
+                                TextColor="#FFFFFF"
+                                BackgroundColor="#0288d1"
+                                Grid.Row="0" 
+                                Grid.Column="0" 
+                                Grid.ColumnSpan="3"
+                    />
+                    <!--Current Mood Slider-->
+                    <Slider  x:Name="SliderMoodRating"
+                                    Value="{Binding OverallMood}" 
+                                    BackgroundColor="#03a9f4"
+                                    ThumbColor="#ff5722"
+                                    MinimumTrackColor="#ff5252"
+                                    MaximumTrackColor="#4caf50"
+                                    Minimum="0" 
+                                    Maximum="10" 
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="3"
+                                    Margin="10"
+                    />
+                    <!--Min mood label-->
+                    <Label   Text="0"                      
+                                    Grid.Row="2" 
+                                    Grid.Column="0" 
+                                    TextColor="#757575"
+                                    FontSize="Caption"
+                                    Margin="15,-12,0,0" 
+                    />
+                    <!--Max mood label-->
+                    <Label   Text ="10"       
+                                    FontSize="Caption"
+                                    Grid.Row="2" 
+                                    Grid.Column="2" 
+                                    HorizontalTextAlignment="End" 
+                                    TextColor="#757575"
+                                    Margin="0,-12,15,0"
+                    />
+                    <!--Displayed Mood Label-->
+                    <Label x:Name="LabelIndicatedMood"   
+                                Grid.Row="2"
+                                Grid.Column="1" 
+                                HorizontalTextAlignment="Center"
+                                FontSize="Medium"
+                                TextColor="#212121"
+                                TextDecorations="Underline"
+                                Text= "{
+                                    Binding Source = {x:Reference SliderMoodRating},
+                                    Path = Value,
+                                    StringFormat ='Value: {0:0.0}'}"
+                    />
+                </Grid>
 
-                <!--Max mood label-->
-                <Label   Text ="10"       
-                         FontSize="Caption"
-                         Grid.Row="2" 
-                         Grid.Column="2" 
-                         HorizontalTextAlignment="End" 
-                         TextColor="White"
-                         Margin="0,-12,15,0"/>
-                <!--Displayed Mood Label-->
-                <Label x:Name="LabelIndicatedMood"   
-                       Grid.Row="2"
-                       Grid.Column="1" 
-                       HorizontalTextAlignment="Center"
-                       FontSize="Medium"
-                       TextColor="White"
-                       TextDecorations="Underline"
-                       Text= "{
-                            Binding Source = {x:Reference SliderMoodRating},
-                            Path = Value,
-                            StringFormat ='Value: {0:0.0}'}"/>
-            </Grid>
+                <Grid BackgroundColor="#b3e5fc" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!--Emotion picker header -->
+                    <Label Text="What is your strongest emotion?"
+                            HorizontalTextAlignment="Center" 
+                            VerticalTextAlignment="Center"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            BackgroundColor="#0288d1"
+                    />
+                    <Entry x:Name="Entry"
+                           Grid.Row="1"
+                           Text="{Binding Emotion}"
+                    />
+                </Grid>
 
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <!--Emotion picker header -->
-            <Label Text="Pick the strongest emotion"
-                   HorizontalTextAlignment="Center" 
-                   VerticalTextAlignment="Center"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   BackgroundColor="DeepPink"
-                   />
-                <!--Emotion Picker -->
-            <Picker x:Name="PickerEmotion" 
-                    SelectedItem="{Binding Emotion}"
-                    Grid.Row="1"/>
-            </Grid>
-
-            <!--Big dum boxy boi -->
-            <Editor x:Name="EditorDescription"
-                    Placeholder="Add a description if you like"
-                    HeightRequest="100"
-                    Text="{Binding Description}"
-                    BackgroundColor="HotPink"
-                    Margin="5"/>
-            <!--Save | Cancel -->
-            <Button x:Name="ButtonCancel" BackgroundColor="LightCoral" Margin="5" Text="Cancel" Clicked="ButtonCancel_OnClicked"/>
-            <Button x:Name="ButtonSave" BackgroundColor="LightGreen" Margin="5" Text="Save" Clicked="ButtonSave_OnClicked"/>
-        </StackLayout>
+                <Grid BackgroundColor="#b3e5fc" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Description"
+                            HorizontalTextAlignment="Center" 
+                            VerticalTextAlignment="Center"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            BackgroundColor="#0288d1"
+                    />
+                    <!--Description box-->
+                    <Editor x:Name="EditorDescription"
+                            Placeholder="Enter more details here if you like"
+                            HeightRequest="100"
+                            Text="{Binding Description}"
+                            TextColor="#212121"
+                            PlaceholderColor="#757575"
+                            BackgroundColor="#b3e5fc"
+                            Margin="5"
+                            Grid.Row="1"
+                    />
+                </Grid>
+                
+                <!-- Save / Cancel grid-->
+                <Grid VerticalOptions="EndAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ButtonCancel" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Cancel" 
+                        Clicked="ButtonCancel_OnClicked"
+                        Grid.Column="0"
+                    />
+                    <Button x:Name="ButtonSave" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Save" 
+                        Clicked="ButtonSave_OnClicked"
+                        Grid.Column="1"   
+                    />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

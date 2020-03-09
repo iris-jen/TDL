@@ -7,152 +7,197 @@
              x:Class="SelfMonitoringApp.Views.SleepLoggerPage"
              Title="Log Sleep">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="DimGray">
-            <!--Substance Used Picker-->
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="60"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+        <ScrollView>
+            <StackLayout BackgroundColor="White">
+                <!--Sleep and wake time pickers-->
+                <Grid BackgroundColor="#b3e5fc" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label  Text ="Sleep Time"
+                            HorizontalTextAlignment ="Center" 
+                            VerticalTextAlignment   ="Center"
+                            FontSize                ="Large"
+                            FontAttributes          ="Bold"
+                            TextColor               ="White"
+                            BackgroundColor         ="#0288d1"
+                    />
+                    <TimePicker x:Name   ="TimePickerSleep"
+                                Grid.Row ="1"
+                    />
+                    <Label  Text = "Wake Time"
+                            HorizontalTextAlignment ="Center" 
+                            VerticalTextAlignment   ="Center"
+                            FontSize                ="Large"
+                            FontAttributes          ="Bold"
+                            TextColor               ="White"
+                            BackgroundColor         ="#0288d1"
+                            Grid.Column             ="1"
+                    />
+                    <TimePicker x:Name   ="TimePickerWake"
+                                Grid.Row    ="1"
+                                Grid.Column ="1"
+                    />
+                </Grid>
+                
+                <!--Rest Slider-->
+                <Grid Margin="5" BackgroundColor="#b3e5fc" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label      Text = "How rested are you?" 
+                            HorizontalTextAlignment ="Center" 
+                            VerticalTextAlignment   ="Center"
+                            FontSize                ="Large"
+                            FontAttributes          ="Bold"
+                            TextColor               ="White"
+                            Grid.Row                ="0" 
+                            Grid.Column             ="0" 
+                            Grid.ColumnSpan         ="3"
+                            BackgroundColor         ="#0288d1"
+                    />
+                    <Slider     x:Name = "SliderRestRating"
+                             
+                             Value             ="{Binding RestRating}" 
+                             BackgroundColor="#03a9f4"
+                             ThumbColor="#ff5722"
+                             MinimumTrackColor="#ff5252"
+                             MaximumTrackColor="#4caf50"
+                             Minimum           ="0" 
+                             Maximum           ="10" 
+                             Grid.Row          ="1"
+                             Grid.Column       ="0"
+                             Grid.ColumnSpan   ="3"
+                             Margin            ="10"
+                    />
+                    <Label      Text = "0"                      
+                             Grid.Row    ="2" 
+                             Grid.Column ="0" 
+                             TextColor   ="#757575"
+                             FontSize    ="Caption"
+                             Margin      ="15,-12,0,0" 
+                    />
+                    <Label      Text = "10"       
+                             FontSize                ="Caption"
+                             Grid.Row                ="2" 
+                             Grid.Column             ="2" 
+                             HorizontalTextAlignment ="End" 
+                             TextColor               ="#757575"
+                             Margin                  ="0,-12,15,0"
+                    />
+                    <Label      x:Name ="LabelIndicatedRest"   
+                           Grid.Row                ="2"
+                           Grid.Column             ="1" 
+                           HorizontalTextAlignment ="Center"
+                           FontSize                ="Medium"
+                           TextColor               ="#212121"
+                           TextDecorations         ="Underline"
+                           Text = "{
+                                Binding Source     = {x:Reference SliderRestRating},
+                                Path               = Value,
+                                StringFormat       ='Value: {0:0.0}'}"/>
+                </Grid>
+                
+                <!--Dream controls-->
+                <Grid BackgroundColor="#b3e5fc" Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label      Text ="Dreams"
+                           HorizontalTextAlignment ="Center" 
+                           VerticalTextAlignment   ="Center"
+                           FontSize                ="Large"
+                           FontAttributes          ="Bold"
+                           TextColor               ="White"
+                           BackgroundColor         ="#0288d1"
+                           Grid.ColumnSpan         ="2"
+                    />
+                    <Label      Text = "Remembered Dream?"
+                           Grid.Row="1" 
+                           HorizontalTextAlignment="Start" 
+                           VerticalTextAlignment="Center" 
+                           TextColor="#212121"
+                           Margin="5"
+                           
+                    />
+                    <Switch     x:Name = "SwitchRememberedDream" 
+                            IsToggled="{Binding RememberedDream}" 
+                            Grid.Row="1" 
+                            Grid.Column="1"
+                            ThumbColor="#ff5722"
+                    />
+                    <Label      Text = "Nightmare?"
+                            Grid.Row="2" 
+                            HorizontalTextAlignment="Start" 
+                            TextColor="#212121"
+                            VerticalTextAlignment="Center" 
+                            Margin="5"
+                    />
+                    <Switch     x:Name = "SwitchNightmare" 
+                                IsToggled   ="{Binding Nightmare}" 
+                                Grid.Row    ="2" 
+                                Grid.Column ="1"
+                                ThumbColor="#ff5722"
+                    />
+                    <Editor     x:Name = "EditorDescription"
+                            Placeholder     ="What did you dream?"
+                            Text            ="{Binding DreamLog}"
+                            TextColor="#212121"
+                            PlaceholderColor="#757575"
+                            BackgroundColor="#b3e5fc"
+                            Margin          ="0"
+                            Grid.Row        ="3"
+                            Grid.ColumnSpan ="2"
+                    />
+                </Grid>
 
-                <Label Text="Sleep Time"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
-                />
-
-                <Label Text="Wake Time"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
-                       Grid.Column="1"
-                />
-            </Grid>
-
-            <!--3X3 Sub Grid for Mood slider and labels-->
-            <Grid Margin="5" BackgroundColor="HotPink" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="1.5*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <!--Rate your mood header-->
-                <Label Text="How rested are you?" 
-                        HorizontalTextAlignment="Center" 
-                        VerticalTextAlignment="Center"
-                        FontSize="Large"
-                        FontAttributes="Bold"
-                        TextColor="White"
-                        BackgroundColor="DeepPink"
-                        Grid.Row="0" 
-                        Grid.Column="0" 
-                        Grid.ColumnSpan="3"/>
-                <!--Current Mood Slider-->
-                <Slider  x:Name="SliderRestRating"
-                         BackgroundColor="LightSalmon"
-                         Value="{Binding RestRating}" 
-                         ThumbColor="BlueViolet"
-                         MinimumTrackColor="Red"
-                         MaximumTrackColor="LawnGreen"
-                         Minimum="0" 
-                         Maximum="10" 
-                         Grid.Row="1"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="3"
-                         Margin="10"
-                         />
-                <!--Min mood label-->
-                <Label   Text="0"                      
-                         Grid.Row="2" 
-                         Grid.Column="0" 
-                         TextColor="White"
-                         FontSize="Caption"
-                         Margin="15,-12,0,0" />
-
-                <!--Max mood label-->
-                <Label   Text ="10"       
-                         FontSize="Caption"
-                         Grid.Row="2" 
-                         Grid.Column="2" 
-                         HorizontalTextAlignment="End" 
-                         TextColor="White"
-                         Margin="0,-12,15,0"/>
-                <!--Displayed Mood Label-->
-                <Label x:Name="LabelIndicatedMood"   
-                       Grid.Row="2"
-                       Grid.Column="1" 
-                       HorizontalTextAlignment="Center"
-                       FontSize="Medium"
-                       TextColor="White"
-                       TextDecorations="Underline"
-                       Text= "{
-                            Binding Source = {x:Reference SliderRestRating},
-                            Path = Value,
-                            StringFormat ='Value: {0:0.0}'}"/>
-            </Grid>
-
-
-
-            <!--Consumption Method Grid-->
-            <Grid BackgroundColor="HotPink" Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="70"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <Label Text="Dreams"
-                       HorizontalTextAlignment="Center" 
-                       VerticalTextAlignment="Center"
-                       FontSize="Large"
-                       FontAttributes="Bold"
-                       TextColor="White"
-                       BackgroundColor="DeepPink"
-                       Grid.ColumnSpan="2"
-                />
-                <Label Grid.Row="1" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Remebered Dream?"></Label>
-                <!--Consumption Method Picker -->
-                <Switch x:Name="SwitchRememberedDream" IsToggled="{Binding RememberedDream}" Grid.Row="1" Grid.Column="1"/>
-
-                <Label Grid.Row="2" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="Nightmare?"></Label>
-                <!--Consumption Method Picker -->
-                <Switch x:Name="SwitchNightmare" IsToggled="{Binding Nightmare}" Grid.Row="2" Grid.Column="1"/>
-
-                <!--Comment Editor -->
-                <Editor x:Name="EditorDescription"
-                        Placeholder="What did you dream?"
-                        Text="{Binding DreamLog}"
-                        BackgroundColor="HotPink"
-                        Margin="0"
-                        Grid.Row="3"
-                        Grid.ColumnSpan="2"
-                        />
-            </Grid>
-
-            <!--Save | Cancel -->
-            <Button x:Name="ButtonCancel" BackgroundColor="LightCoral" Margin="5" Text="Cancel" Clicked="ButtonCancel_OnClicked"/>
-            <Button x:Name="ButtonSave" BackgroundColor="LightGreen" Margin="5" Text="Save" Clicked="ButtonSave_OnClicked"/>
-        </StackLayout>
+                <!-- Save / Cancel grid-->
+                <Grid VerticalOptions="EndAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ButtonCancel" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Cancel" 
+                        Clicked="ButtonCancel_OnClicked"
+                        Grid.Column="0"
+                    />
+                    <Button x:Name="ButtonSave" 
+                        CornerRadius="10" 
+                        BorderWidth="5" 
+                        BorderColor="#ff5722"
+                        BackgroundColor="#03a9f4" 
+                        Margin="5" 
+                        Text="Save" 
+                        Clicked="ButtonSave_OnClicked"
+                        Grid.Column="1"   
+                    />
+                </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
