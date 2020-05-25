@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+using NLog.Common;
 
 namespace SelfMonitoringApp.Services
 {
@@ -13,6 +14,7 @@ namespace SelfMonitoringApp.Services
     public static class Helper
     {
 
+        
         public const string PrimaryTextColor = "212121";
         public const string SecondaryTextColor = "757575";
         public const string DividerColor = "BDBDBD";
@@ -27,6 +29,15 @@ namespace SelfMonitoringApp.Services
 
             return $"{date} {hour}:{dt.Minute}:{dt.Second} {(_24hour ? string.Empty: pm ? "pm":"am")}";
         }
+
+        public static string GetTimeString(DateTime dt)
+        {
+            var pm = dt.Hour >= 12;
+            var hour = pm ? dt.Hour - 12 : dt.Hour;
+            
+            return $"{(hour == 0 ? 12 :hour):00}:{dt.Minute:00} {(pm ? "PM" : "AM")}";
+        }
+
 
         public const string AddNew = "-Add New-";
 
@@ -117,12 +128,6 @@ namespace SelfMonitoringApp.Services
         public static void ClearSuggestions()
         {
 
-        }
-
-        public static async void PopAlarm(Exception e, [CallerMemberName] string membername ="")
-        {
-            
-        }
-        
+        }        
     }
 }

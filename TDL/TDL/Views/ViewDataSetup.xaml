@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
+             xmlns:local="clr-namespace:SelfMonitoringApp.Views"
+             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             mc:Ignorable="d"
+             x:Class="SelfMonitoringApp.Views.ViewMoodDataSetup"
+             Title="View Mood Logs">
+    <ContentPage.Resources>
+        <local:BoolInverterConverter x:Key="BoolInverter"/>
+        <local:GraphListBoolConverter x:Key="BoolToString"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid BackgroundColor="#b3e5fc" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <controls:GroupHeaderDark Text="Start Date"/>
+                        <DatePicker x:Name="DatePickerStartDate" Grid.Row="1" Date="{Binding StartDate}" />
+
+                        <controls:GroupHeaderDark Text="End Date" Grid.Column="1" />
+                        <DatePicker x:Name="DatePickerEndDate" Grid.Row="1" Grid.Column="1"  Date="{Binding EndDate}"/>
+                    </Grid>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <controls:GroupHeaderDark Grid.ColumnSpan="2" Text="{Binding Source={x:Reference ViewToggle}, 
+                                              Path=IsToggled, Converter={StaticResource BoolToString}}" />
+                    <Switch x:Name="ViewToggle" IsToggled="True" HorizontalOptions="CenterAndExpand" Grid.Column="1" ThumbColor="LightGreen"></Switch>
+                </Grid>
+
+                <ListView SeparatorVisibility="Default" SeparatorColor="Black" IsGroupingEnabled="True" 
+                          BackgroundColor="DarkGray" ItemsSource="{Binding FilteredMoodGroups}" 
+                          ItemTapped="ListView_ItemTapped"
+                          HasUnevenRows="True"
+                          IsVisible="{Binding Source= {x:Reference ViewToggle}, Path= IsToggled}">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell Height="80">
+                                <Label HorizontalTextAlignment="Center" 
+                                                VerticalTextAlignment="Center" 
+                                                TextColor="White"
+                                                BackgroundColor="#0288d1"
+                                                TextDecorations="Underline"
+                                                FontAttributes="Bold"
+                                                Text="{Binding HeaderText}" 
+                                                FontSize="Title"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+
+                    <!-- Item template for the list view items, bound to mood object-->
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout VerticalOptions="FillAndExpand">
+                                    <Grid HeightRequest="40">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width=".8*"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <controls:LightLabel Grid.Column = "0" Text="{Binding Time}"/>
+                                        <controls:LightLabel Grid.Column = "1" Text="{Binding MoodRating}"/>
+                                        <controls:LightLabel Grid.Column = "2" Text="{Binding Emotion}"/>
+                                    </Grid>
+                                    <Grid IsVisible="{Binding IsSelected}" MinimumHeightRequest="200">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            
+                                        </Grid.ColumnDefinitions>
+                                        <controls:DarkButton    Text="Edit" Grid.Column="0" 
+                                                                Command="{Binding EditLogCommand}"/>
+                                        <controls:NoColorButton Text="DEL"  Grid.Column="1" BackgroundColor="Red" 
+                                                                Command="{Binding DeleteLogCommand}"/>
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    
+                    
+                </ListView>
+
+                <forms:ChartView x:Name="MoodChart" VerticalOptions="FillAndExpand" HorizontalOptions="Fill" 
+                                 IsVisible="{Binding Source= {x:Reference ViewToggle}, Path= IsToggled, Converter={StaticResource BoolInverter}}"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

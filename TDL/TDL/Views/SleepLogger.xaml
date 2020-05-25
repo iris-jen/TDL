@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
              x:Class="SelfMonitoringApp.Views.SleepLoggerPage"
              Title="Log Sleep">
@@ -10,7 +11,8 @@
         <ScrollView>
             <StackLayout BackgroundColor="White">
                 <!--Sleep and wake time pickers-->
-                <Grid BackgroundColor="#b3e5fc" Margin="5">
+                
+                <Grid BackgroundColor="#b3e5fc" Margin="5" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="60"/>
@@ -44,72 +46,8 @@
                                 Grid.Column ="1"
                     />
                 </Grid>
-                
-                <!--Rest Slider-->
-                <Grid Margin="5" BackgroundColor="#b3e5fc" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Label      Text = "How rested are you?" 
-                            HorizontalTextAlignment ="Center" 
-                            VerticalTextAlignment   ="Center"
-                            FontSize                ="Large"
-                            FontAttributes          ="Bold"
-                            TextColor               ="White"
-                            Grid.Row                ="0" 
-                            Grid.Column             ="0" 
-                            Grid.ColumnSpan         ="3"
-                            BackgroundColor         ="#0288d1"
-                    />
-                    <Slider     x:Name = "SliderRestRating"
-                             
-                             Value             ="{Binding RestRating}" 
-                             BackgroundColor="#03a9f4"
-                             ThumbColor="#ff5722"
-                             MinimumTrackColor="#ff5252"
-                             MaximumTrackColor="#4caf50"
-                             Minimum           ="0" 
-                             Maximum           ="10" 
-                             Grid.Row          ="1"
-                             Grid.Column       ="0"
-                             Grid.ColumnSpan   ="3"
-                             Margin            ="10"
-                    />
-                    <Label      Text = "0"                      
-                             Grid.Row    ="2" 
-                             Grid.Column ="0" 
-                             TextColor   ="#757575"
-                             FontSize    ="Caption"
-                             Margin      ="15,-12,0,0" 
-                    />
-                    <Label      Text = "10"       
-                             FontSize                ="Caption"
-                             Grid.Row                ="2" 
-                             Grid.Column             ="2" 
-                             HorizontalTextAlignment ="End" 
-                             TextColor               ="#757575"
-                             Margin                  ="0,-12,15,0"
-                    />
-                    <Label      x:Name ="LabelIndicatedRest"   
-                           Grid.Row                ="2"
-                           Grid.Column             ="1" 
-                           HorizontalTextAlignment ="Center"
-                           FontSize                ="Medium"
-                           TextColor               ="#212121"
-                           TextDecorations         ="Underline"
-                           Text = "{
-                                Binding Source     = {x:Reference SliderRestRating},
-                                Path               = Value,
-                                StringFormat       ='Value: {0:0.0}'}"/>
-                </Grid>
-                
+
+                <controls:RatingSlider></controls:RatingSlider>
                 <!--Dream controls-->
                 <Grid BackgroundColor="#b3e5fc" Margin="5">
                     <Grid.RowDefinitions>

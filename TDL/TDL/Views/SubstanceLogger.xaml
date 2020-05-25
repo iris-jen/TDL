@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              mc:Ignorable="d"
              x:Class="SelfMonitoringApp.Views.SubstanceLoggerPage"
              Title="Log Substance Use">
@@ -28,6 +29,7 @@
                     <!--Substance Picker-->
                     <Picker x:Name="PickerSubstance" 
                         SelectedItem="{Binding SubstanceName}"
+                        ItemsSource="{Binding SubstancesList}"
                         Grid.Row="1"
                     />
                 </Grid>
@@ -51,6 +53,7 @@
                     <!--Consumption Method Picker -->
                     <Picker x:Name="PickerUseMethod" 
                             SelectedItem="{Binding ConsumptionMethod}"
+                            ItemsSource="{Binding DeliveryMethodList}"
                             Grid.Row="1"
                     />
                 </Grid>
@@ -96,6 +99,7 @@
                     <!--Unit Picker-->
                     <Picker x:Name="PickerUnit" 
                             SelectedItem="{Binding Unit}"
+                            ItemsSource="{Binding UnitList}"
                             Grid.Row="1" 
                             Grid.Column="1"
                     />
@@ -125,33 +129,7 @@
                         Grid.Row="1"
                         Margin="5"/>
                 </Grid>
-                <!-- Save / Cancel grid-->
-                <Grid VerticalOptions="EndAndExpand">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="ButtonCancel" 
-                        CornerRadius="10" 
-                        BorderWidth="5" 
-                        BorderColor="#ff5722"
-                        BackgroundColor="#03a9f4" 
-                        Margin="5" 
-                        Text="Cancel" 
-                        Clicked="ButtonCancel_OnClicked"
-                        Grid.Column="0"
-                    />
-                    <Button x:Name="ButtonSave" 
-                        CornerRadius="10" 
-                        BorderWidth="5" 
-                        BorderColor="#ff5722"
-                        BackgroundColor="#03a9f4" 
-                        Margin="5" 
-                        Text="Save" 
-                        Clicked="ButtonSave_OnClicked"
-                        Grid.Column="1"   
-                    />
-                </Grid>
+                <controls:SaveCancel/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

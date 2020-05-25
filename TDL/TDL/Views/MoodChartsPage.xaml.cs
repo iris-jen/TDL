@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Microcharts;
-using SelfMonitoringApp.Models;
+using SelfMonitoringApp.LogModels;
 using Microcharts.Forms;
 using System;
 using System.Collections.Generic;
@@ -18,9 +18,7 @@ namespace SelfMonitoringApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MoodChartsPage : ContentPage
-    {
-
-        
+    {        
         public MoodChartsPage(List<Mood> moodList)
         {
             try
@@ -67,16 +65,20 @@ namespace SelfMonitoringApp.Views
                 {
                     entries.Add(new Entry((float)m.OverallMood)
                     {
-                        ValueLabel = m.OverallMood.ToString(),
+                        ValueLabel = m.OverallMood.ToString("0.0"),
                         Color = GetColorFromRating(m.OverallMood),
                         Label = m.Emotion,
                         TextColor = SKColors.Black,
+                        
                     }) ;
                     
                 }
                 
 
-                MoodChart.Chart = new LineChart() { Entries = entries, LabelTextSize = 8, BackgroundColor = SKColors.Black };
+                MoodChart.Chart = new LineChart() { Entries = entries, LabelTextSize = 50, BackgroundColor = SKColors.Black , PointMode = PointMode.Square, PointSize = 30};
+                MoodChart.Chart.MaxValue = 10;
+                MoodChart.Chart.MinValue = 0;
+                
             }
             catch (Exception ex)
             {
@@ -85,33 +87,6 @@ namespace SelfMonitoringApp.Views
         }
 
 
-
-
-        
-        private async void ButtonCancel_OnClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                await Navigation.PopAsync();
-            }
-            catch (Exception ex)
-            {
-                DisplayException(ex.ToString());
-            }
-        }
-
-        private async void ButtonSave_OnClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                await ItemStores.SaveObject(ObjectNames.Substance);
-                await Navigation.PopAsync();
-            }
-            catch(Exception ex)
-            {
-                DisplayException(ex.ToString());
-            }
-        }
 
 
         public void DisplayException(string message)

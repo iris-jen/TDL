@@ -1,8 +1,9 @@
 ﻿using System;
-using SelfMonitoringApp.Models;
+using SelfMonitoringApp.LogModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Threading.Tasks;
+using SelfMonitoringApp.Services;
 
 namespace SelfMonitoringApp.Views
 {
@@ -11,7 +12,7 @@ namespace SelfMonitoringApp.Views
     {
         private Sleep _sleep = new Sleep();
 
-        public SleepLoggerPage(Sleep sleep)
+        public SleepLoggerPage()
         {
             InitializeComponent();
             BindingContext = _sleep;
@@ -48,8 +49,7 @@ namespace SelfMonitoringApp.Views
                 return;
             }
 
-            await ItemStores.SleepStores.AddItemAsync(_sleep);
-            await ItemStores.SaveObject(ObjectNames.Sleep);
+            await StoreService.ItemStores.SleepStores.AddItemAsync(_sleep);
             await Navigation.PopAsync();
         }
 

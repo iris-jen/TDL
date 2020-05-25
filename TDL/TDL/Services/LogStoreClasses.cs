@@ -3,14 +3,13 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using SelfMonitoringApp.Models;
+using SelfMonitoringApp.LogModels;
 
 namespace SelfMonitoringApp.Services
 {
-    public class SubstanceStore : StoreBase<Substance> { }
-    public class SleepStore: StoreBase<Sleep> { }
-
-    public class MoodStore : StoreBase<Mood> 
+    public class SubstanceStore     : LogStoreBase<Substance> { }
+    public class SleepStore         : LogStoreBase<Sleep> { }
+    public class MoodStore          : LogStoreBase<Mood>
     { 
         public async Task AddRandomLogs()
         {
@@ -43,7 +42,7 @@ namespace SelfMonitoringApp.Services
                         );
 
                     Mood m = new Mood();
-                    m.Description = $"AutoGen {j}";
+                    m.Description = $"IM A (AutoGen {j}) DESCRIPTION BLAH BLAH \n abbasdfabsdasdadasdawdasd \n asdasdasdasdsa";
                     m.RegisteredTime = dt;
 
                     var emotionIndex = rand.Next(Emotions.Count);
@@ -55,5 +54,5 @@ namespace SelfMonitoringApp.Services
             }
         }
     }
-    public class MealStore : StoreBase<Meal> { }
+    public class MealStore          : LogStoreBase<Meal> { }
 }

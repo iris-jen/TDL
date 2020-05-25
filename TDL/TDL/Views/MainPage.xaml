@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:SelfMonitoringApp.Controls"
              x:Class="SelfMonitoringApp.Views.MainPage"
              Title="Self Monitoring Home">
     <ScrollView>
         <Grid HeightRequest="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
-                <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid BackgroundColor="#b3e5fc" Margin="5" >
@@ -22,114 +22,21 @@
                     <ColumnDefinition Width=".5*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Label Text="Logging" 
-                            HorizontalTextAlignment="Center" 
-                            VerticalTextAlignment="Center"
-                            FontSize="Large"
-                            FontAttributes="Bold"
-                            TextColor="#FFFFFF"
-                            BackgroundColor="#0288d1"
-                            Grid.Row="0" 
-                            Grid.Column="0" 
-                            Grid.ColumnSpan="2"
-                />
-                <Button x:Name="ButtonGoToMood" 
-                        Text="Log Current Mood" 
-                        Clicked="Goto_Mood_Clicked"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#0288d1"
-                        Margin="5"/>
-                <Button x:Name="ButtonGoToFood" 
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Text="Log Eating"                         
-                        BackgroundColor="#0288d1"
-                        Margin="5"
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        Clicked="ButtonGoToFood_OnClicked"/>
-                <Button x:Name="ButtonGoToSleep"        
-                        Grid.Row="3" 
-                        Grid.Column="1"
-                        Margin="5" 
-                        Text="Log Sleep" 
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#0288d1"
-                        Clicked="ButtonGoToSleep_OnClicked"/>
-                <Button x:Name="ButtonGoToSubstance"         
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Text="Log Substance Use"
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#0288d1"
-                        Margin="5" 
-                        Clicked="ButtonGoToSubstance_OnClicked"/>
-                
-                <Button x:Name="ButtonViewMoodData"        
-                        Grid.Row="1" 
-                        Grid.Column="0"
-                        Margin="5" 
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#03a9f4"
-                        Clicked="ButtonViewMoodData_OnClicked"/>
-                <Button x:Name="ButtonViewFoodData"        
-                        Grid.Row="2" 
-                        Grid.Column="0"
-                        Margin="5" 
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#03a9f4"
-                        Clicked="ButtonViewMoodData_OnClicked"/>
-                <Button x:Name="ButtonViewSleepData"        
-                        Grid.Row="3" 
-                        Grid.Column="0"
-                        Margin="5" 
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#03a9f4"
-                        Clicked="ButtonViewMoodData_OnClicked"/>
-                <Button x:Name="ButtonViewSubstanceData"        
-                        Grid.Row="4" 
-                        Grid.Column="0"
-                        Margin="5" 
-                        BorderWidth="3"
-                        CornerRadius="10"
-                        BorderColor="#ff5722"
-                        BackgroundColor="#03a9f4"
-                        Clicked="ButtonViewMoodData_OnClicked"/>
+
+                <!--Logging buttons header-->
+                <controls:GroupHeaderDark Text="Logging" Grid.ColumnSpan="2"/>
+                <controls:DarkButton Grid.Row="1" Grid.Column="1" Text="Log Mood"           Command="{Binding GoMoodLoggerCommand}"/>
+                <controls:DarkButton Grid.Row="2" Grid.Column="1" Text="Log Meal"           Command="{Binding GoMealLoggerCommand}"/>
+                <controls:DarkButton Grid.Row="3" Grid.Column="1" Text="Log Sleep"          Command="{Binding GoSleepLoggerCommand}"/>
+                <controls:DarkButton Grid.Row="4" Grid.Column="1" Text="Log SubstanceUse"   Command="{Binding GoSubstanceLoggerCommand}"/>
+                <controls:ViewButton Grid.Row="1" Command = "{Binding GoViewMoodDataCommand}"/>
+                <controls:ViewButton Grid.Row="2" Command = "{Binding GoViewMealDataCommand}"/>
+                <controls:ViewButton Grid.Row="3" Command = "{Binding GoViewSleepDataCommand}"/>
+                <controls:ViewButton Grid.Row="4" Command = "{Binding GoViewSubstanceDataCommand}"/>
             </Grid>
 
-            <Button x:Name="ButtonViewSchedule"        
-                Text="View And Setup Routines" 
-                Margin="5" 
-                BorderWidth="3"
-                Grid.Row="1"
-                CornerRadius="10"
-                BorderColor="#ff5722"
-                BackgroundColor="#03a9f4"
-                />
-            <Button x:Name="ButtonAbout"        
-                Text="-About-" 
-                Grid.Row="2" 
-                Margin="5" 
-                BackgroundColor="#b2ebf2"
-                BorderWidth="3"
-                CornerRadius="10"
-                BorderColor="#ff5722"
-                />
+            <Button Grid.Row="1"   BorderWidth="3" Margin="5" BackgroundColor="#b2ebf2" BorderColor="#ff5722"
+                    CornerRadius="10" Text="Settings" Command ="{Binding GoSettingsCommand}"/>
         </Grid>
     </ScrollView>
 </ContentPage>

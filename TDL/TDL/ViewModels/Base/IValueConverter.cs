@@ -1,23 +1,13 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using System.Text;
 using Xamarin.Forms;
 
-namespace SelfMonitoringApp.Models
+namespace SelfMonitoringApp.ViewModels.Base
 {
-    public abstract class ModelBase : INotifyPropertyChanged, IValueConverter
+    public abstract partial class BaseViewModel: IValueConverter
     {
-        protected ModelBase() { }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private static object GenericConverter(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
@@ -29,7 +19,7 @@ namespace SelfMonitoringApp.Models
                         case string _ when int.TryParse(value.ToString(), out var intRet):
                             return intRet;
                         case double d:
-                            return (int) d;
+                            return (int)d;
                         default:
                             return -999;
                     }
@@ -41,7 +31,7 @@ namespace SelfMonitoringApp.Models
                         case string _ when double.TryParse(value.ToString(), out var doubleRet):
                             return doubleRet;
                         case int i:
-                            return (double) i;
+                            return (double)i;
                         case string _:
                             return -999;
 
@@ -65,6 +55,5 @@ namespace SelfMonitoringApp.Models
         {
             return GenericConverter(value, targetType, parameter, culture);
         }
-
     }
 }

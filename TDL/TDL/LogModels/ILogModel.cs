@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SelfMonitoringApp.Models
+namespace SelfMonitoringApp.LogModels
 {
-    public interface IModel
+    public interface ILogModel
     {
         DateTime RegisteredTime { get; set; }
     }

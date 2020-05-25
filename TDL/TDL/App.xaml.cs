@@ -4,15 +4,20 @@ using Xamarin.Forms;
 
 using Xamarin.Forms.Xaml;
 using System;
+using Plugin.Permissions;
+using System.Threading.Tasks;
+using Plugin.Permissions.Abstractions;
+
 namespace SelfMonitoringApp
 {
+    
+
     public partial class App : Application
     {
+
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MoodStore>();
             MainPage = new NavigationPage(new MainPage());
         }
 
@@ -20,20 +25,36 @@ namespace SelfMonitoringApp
         {
             try
             {
-                ItemStores.InitStores();
+
+                Task.Run(GetPermision);
+                StoreService.LoadStores();
             }
             catch (Exception e)
             {
 
             }
-                        
+        }
+        public static async Task<bool> GetPermision()
+        {
+            var lastPermision = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+
+            if (lastPermision != PermissionStatus.Granted)
+            {
+
+                var permissionResponse = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Storage);
+                return permissionResponse[Permission.Storage] == PermissionStatus.Granted;
+            }
+            return true;
         }
 
-        
+
+
+
         protected override void OnSleep()
         {
-            ItemStores.SaveObject(ObjectNames.All);
+            StoreService.SaveStores();
         }
+
 
         protected override void OnResume()
         {
